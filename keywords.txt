@@ -1,0 +1,28 @@
+#######################################
+# Syntax Coloring Map For ST7789_LTSM
+#######################################
+
+#######################################
+# Class
+#######################################
+ST7789_LTSM	KEYWORD1
+
+#######################################
+# Methods
+#######################################
+setupGPIO_SPI	KEYWORD2
+TFTInitScreenSize	KEYWORD2
+TFTST7789Initialize	KEYWORD2
+TFTPowerDown	KEYWORD2
+setRotation	KEYWORD2
+TFTchangeInvertMode	KEYWORD2
+TFTpartialDisplay	KEYWORD2
+TFTenableDisplay	KEYWORD2
+TFTidleDisplay	KEYWORD2
+TFTsleepDisplay	KEYWORD2
+TFTNormalMode	KEYWORD2
+TFTSwSpiGpioDelayGet	KEYWORD2
+TFTSwSpiGpioDelaySet	KEYWORD2
+TFTresetSWDisplay	KEYWORD2
+setScrollDefinition	KEYWORD2
+TFTVerticalScroll	KEYWORD2
