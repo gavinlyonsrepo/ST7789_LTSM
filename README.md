@@ -44,7 +44,7 @@ The library is included in the official Arduino library manger and the optimum w
 
 This library requires the Arduino library 'display16_LTSM' as a dependency. display16_LTSM library contains
 the graphics, bitmaps, and font methods as well as font data and bitmap test data. Its also 
-where the user sets options(debug, advanced graphics and frame buffer mode). 'display16_LTSM' is also written by Author of this library. 
+where the user sets options(debug, advanced graphics and frame buffer mode). 'display16_LTSM' is also written by author of this library. 
 When you install 'ST7789_LTSM' with Arduino IDE. It should install 'display16_LTSM' as well after 
 a prompt, if it does not you have to install it same way as 'ST7789_LTSM'.
 The 'display16_LTSM' project and readme is at [URL github link](https://github.com/gavinlyonsrepo/display16_LTSM)
@@ -78,8 +78,7 @@ The 5 GPIO pins used. Any GPIO can be used for these.
 *USER OPTION 2 Screen size + Offsets*
 
 User can adjust screen pixel height, screen pixel width and x & y screen offsets.
-These offsets can be used in the event of screen damage or manufacturing errors around edge
-such as cropped data or defective pixels. The function TFTInitScreenSize sets them.
+The function TFTInitScreenSize sets them.
 
 ## Hardware
 
@@ -101,7 +100,7 @@ Connections as setup in HELLO_WORLD.ino  test file.
 3. You can connect VCC to 5V if there is a 3.3 volt regulator on back of TFT module.
 4. Pick any GPIO you like but on HW SPI mode SCLK and SDA will be tied to SPIO interface of MCU.
 5. Backlight on/off control is left to user.
-6. If no reset pin on display or hat, pass -1 as argument to disable.s
+6. If no reset pin on display or hat, pass -1 as argument to disable.
 
 ## Output
 
@@ -123,5 +122,5 @@ For example  if you have a 240X280 display in 0 degree rotation, the VRAM is sam
 [![pic ](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/blob/main/extra/image/offset_st7789.png)](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/blob/main/extra/image/offset_st7789.png)
 
 Also if you have a 240x135 size display and you see the issue described in 
-[github issue 10 ](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/issues/10) 
+[github issue 10 at PICO source port ](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/issues/10) 
 You can alternately apply the fix there to function AdjustWidthHeight().
