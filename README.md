@@ -113,11 +113,11 @@ Tested with both software and hardware SPI on:
 
 Compiled only (not fully hardware-tested) on:
 
-- **Arduino UNO** and **Arduino NANO v3**
+- **Arduino UNO**
 - **ESP8266**
 - **STM32 “Blue Pill”**
 
-> Many low-RAM MCUs may fail have insufficient memory if numerous fonts and bitmaps are enabled.  
+> Some examples on low-RAM MCUs will fail( insufficient memory ), numerous fonts and bitmap data are included.  
 > Frame buffer mode requires sufficient dynamic memory for the buffer — see the README in display16_LTSM for details.
 
 ## Output
