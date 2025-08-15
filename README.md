@@ -102,6 +102,24 @@ Connections as setup in HELLO_WORLD.ino  test file.
 5. Backlight on/off control is left to user.
 6. If no reset pin on display or hat, pass -1 as argument to disable.
 
+
+## Tested
+
+Tested with both software and hardware SPI on:
+
+- **ESP32**
+- **Arduino UNO R4 Minima**  
+  *Frame buffer example is not supported on this board.*
+
+Compiled only (not fully hardware-tested) on:
+
+- **Arduino UNO** and **Arduino NANO v3**
+- **ESP8266**
+- **STM32 “Blue Pill”**
+
+> Many low-RAM MCUs may fail have insufficient memory if numerous fonts and bitmaps are enabled.  
+> Frame buffer mode requires sufficient dynamic memory for the buffer — see the README in display16_LTSM for details.
+
 ## Output
 
 [![output pic](https://github.com/gavinlyonsrepo/Display_Lib_RPI/blob/main/extra/images/st7789output.jpg)](https://github.com/gavinlyonsrepo/Display_Lib_RPI/blob/main/extra/images/st7789output.jpg)
