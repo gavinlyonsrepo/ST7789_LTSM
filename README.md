@@ -9,6 +9,7 @@
   * [Overview](#overview)
   * [Installation](#installation)
   * [Dependency](#dependency)
+  * [Documentation](#documentation)
   * [Software](#software)
       * [SPI](#spi)
       * [Bitmap](#bitmap)
@@ -32,9 +33,7 @@ C++ Library for a ST7789 TFT SPI LCD for the Arduino Eco-system.
 5. Advanced frame buffer mode included.
 6. Bitmaps supported: 1, 8 and 16 bit.
 7. Hardware & software SPI options
-8. Code commented for 'doxygen' API generation tool.
-
-## Software
+8. [Project url link](https://github.com/gavinlyonsrepo/ST7789_LTSM)
 
 ## Installation
 
@@ -49,6 +48,13 @@ When you install 'ST7789_LTSM' with Arduino IDE. It should install 'display16_LT
 a prompt, if it does not you have to install it same way as 'ST7789_LTSM'.
 The 'display16_LTSM' project and readme is at [URL github link](https://github.com/gavinlyonsrepo/display16_LTSM)
 
+## Documentation
+
+Code is commented for the 'doxygen' API generation tool.
+Documents on fonts, bitmaps and graphics can be found at 
+the dependency 'display16_LTSM' repository, [URL github link](https://github.com/gavinlyonsrepo/display16_LTSM)
+
+## Software
 
 ### SPI
 
