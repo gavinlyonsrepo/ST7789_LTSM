@@ -12,7 +12,7 @@
   * [Documentation](#documentation)
   * [Software](#software)
       * [SPI](#spi)
-      * [Bitmap](#bitmap)
+      * [Examples](#examples)
   * [Hardware](#hardware)
   * [Tested](#tested)
   * [Output](#output)
@@ -86,6 +86,19 @@ The 5 GPIO pins used. Any GPIO can be used for these.
 User can adjust screen pixel height, screen pixel width and x & y screen offsets.
 The function TFTInitScreenSize sets them.
 
+
+### Examples
+
+| Filename .ino | Function  | Note |
+| --- | --- | --- |
+| HELLO WORLD | Hello world basic use case | --- |
+| TEST | Text + fonts | --- |
+| GRAPHICS| Graphics | dislib16 ADVANCED GRAPHICS ENABLE must be enabled for all tests to work|
+| FUNCTIONS FPS| Functions(like rotate, scroll) + FPS tests| --- |
+| BITMAP| 1,8 & 16 bit bitmaps tests + bitmap FPS tests| Bitmap test data is stored in arrays |
+| DEMO| A demo  | dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
+| FRAME BUFFER | Testing frame Buffer mode | dislib16 ADVANCED SCREEN BUFFER ENABLE must be enabled user option 2 |
+
 ## Hardware
 
 Connections as setup in HELLO_WORLD.ino  test file.
@@ -94,7 +107,7 @@ Connections as setup in HELLO_WORLD.ino  test file.
 | --- | --- | --- | --- |
 | 1 | LED | VCC | VCC |
 | 2 | SCLK | MCU SPI CLK | GPIO12 |
-| 3 | SDA | MCU MOSI CLK | GPIO13 |
+| 3 | SDA | MCU MOSI | GPIO13 |
 | 4 | A0/DC | GPIO5 | GPIO5 |
 | 5 | RESET | GPIO4 | GPIO4 |
 | 6 | SS/CS | GPIO15 | GPIO15 |
