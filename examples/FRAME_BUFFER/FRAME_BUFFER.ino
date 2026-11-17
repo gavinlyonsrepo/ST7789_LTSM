@@ -30,41 +30,38 @@ ST7789_LTSM myTFT;
 bool bhardwareSPI = true;  // true for hardware spi, false for software
 
 void setup(void) {
-  Serial.begin(38400);  // optional
-  delay(1500);
+	Serial.begin(38400);  // optional
+	delay(1500);
 
-  // === USER OPTION 1 SPI_SPEED + TYPE ===
-  int8_t DC_TFT = 5;
-  int8_t RST_TFT = 4;
-  int8_t CS_TFT = 15;
-  if (bhardwareSPI == true) {          // hw spi
-    uint32_t TFT_SCLK_FREQ = 8000000;  // Spi freq in Hertz
-    myTFT.setupGPIO_SPI(TFT_SCLK_FREQ, RST_TFT, DC_TFT, CS_TFT);
-  } else {                        // sw spi
-    uint16_t SWSPICommDelay = 0;  // optional SW SPI GPIO delay in uS
-    int8_t SDIN_TFT = 13;
-    int8_t SCLK_TFT = 12;
-    myTFT.setupGPIO_SPI(SWSPICommDelay, RST_TFT, DC_TFT, CS_TFT, SCLK_TFT, SDIN_TFT);
-  }
-  // ===
-  // ===  USER OPTION 2 Screen Setup ===
-  uint16_t OFFSET_COL = 0;    // These offsets can be adjusted for any issues->
-  uint16_t OFFSET_ROW = 0;    // with screen manufacture tolerance/defects
-  uint16_t TFT_WIDTH = 135;   // Screen width in pixels
-  uint16_t TFT_HEIGHT = 240;  // Screen height in pixels
-  myTFT.TFTInitScreenSize(OFFSET_COL, OFFSET_ROW, TFT_WIDTH, TFT_HEIGHT);
-  // ===
-  myTFT.TFTST7789Initialize();
-  if (myTFT.setBuffer() != DisLib16::Success)
-  {
-    Serial.println("set buffer failed.");
-    while(1){};
-  }
-	myTFT.setTextCharPixelOrBuffer(true); // set to use pixel mode for text
+	// === USER OPTION 1 SPI_SPEED + TYPE ===
+	int8_t DC_TFT = 5;
+	int8_t RST_TFT = 4;
+	int8_t CS_TFT = 15;
+	if (bhardwareSPI == true) {          // hw spi
+		uint32_t TFT_SCLK_FREQ = 8000000;  // Spi freq in Hertz
+		myTFT.setupGPIO_SPI(TFT_SCLK_FREQ, RST_TFT, DC_TFT, CS_TFT);
+	} else {                        // sw spi
+		uint16_t SWSPICommDelay = 0;  // optional SW SPI GPIO delay in uS
+		int8_t SDIN_TFT = 13;
+		int8_t SCLK_TFT = 12;
+		myTFT.setupGPIO_SPI(SWSPICommDelay, RST_TFT, DC_TFT, CS_TFT, SCLK_TFT, SDIN_TFT);
+	}
+	// ===
+	// ===  USER OPTION 2 Screen Setup ===
+	uint16_t OFFSET_COL = 0;    // These offsets can be adjusted for any issues->
+	uint16_t OFFSET_ROW = 0;    // with screen manufacture tolerance/defects
+	uint16_t TFT_WIDTH = 240;   // Screen width in pixels
+	uint16_t TFT_HEIGHT = 280;  // Screen height in pixels
+	myTFT.TFTInitScreenSize(OFFSET_COL, OFFSET_ROW, TFT_WIDTH, TFT_HEIGHT);
+	// ===
+	myTFT.TFTST7789Initialize();
+	// set required rotation before setting the buffer
+	myTFT.setRotation(myTFT.Degrees_0); // 0 degrees = default, not needed, shown for clarity
+	SetBuffer();
+	myTFT.setTextCharPixelOrBuffer(true);  // set to use pixel mode for text
 }
 
-void loop(void)
-{
+void loop(void) {
 	Test1();
 	TestRotate();
 	TestBitmap();
@@ -74,25 +71,22 @@ void loop(void)
 }
 // *** End OF MAIN **
 
-void EndTests(void)
-{
+void EndTests(void) {
 	myTFT.fillScreen(myTFT.C_BLACK);
 	myTFT.clearBuffer(myTFT.C_BLACK);
 	myTFT.destroyBuffer();
 	myTFT.TFTPowerDown();
 	Serial.println("Tests Over");
-  while(1){};
+	while (1) {};
 }
 
-void ScreenReset(void)
-{
+void ScreenReset(void) {
 	myTFT.writeBuffer();
 	delay(2500);
 	myTFT.clearBuffer(myTFT.C_BLACK);
 }
 
-void Test1(void)
-{
+void Test1(void) {
 	Serial.println("Test1");
 	myTFT.clearBuffer(myTFT.C_RED);
 	myTFT.writeBuffer();
@@ -113,41 +107,39 @@ void Test1(void)
 	delay(5000);
 }
 
-void TestRotate(void)
-{
+void TestRotate(void) {
 	Serial.println("Rotate");
 	myTFT.fillScreen(myTFT.C_BLACK);
 	myTFT.clearBuffer(myTFT.C_BLACK);
-	const char *rotationLabels[] = {"Rotate 0", "Rotate 90", "Rotate 180", "Rotate 270"};
+	const char *rotationLabels[] = { "Rotate 270", "Rotate 90", "Rotate 180", "Rotate 0" };
 	const decltype(myTFT.Degrees_0) rotations[] = {
-		myTFT.Degrees_0,
+		myTFT.Degrees_270,
 		myTFT.Degrees_90,
 		myTFT.Degrees_180,
-		myTFT.Degrees_270};
-	for (int i = 0; i < 4; ++i)
-	{
+		myTFT.Degrees_0
+	};
+	for (int i = 0; i < 4; ++i) {
 		myTFT.setRotation(rotations[i]);
+		// Reset the buffer after ever rotation for display where width =/= height
+		SetBuffer();
 		myTFT.setCursor(20, 20);
 		myTFT.print(rotationLabels[i]);
-		myTFT.setCursor(20, 100);
+		myTFT.setCursor(20, 220);
 		myTFT.print("line");
 		ScreenReset();
 	}
-	myTFT.setRotation(myTFT.Degrees_0);
 	ScreenReset();
 }
 
-void TestBitmap(void)
-{
+void TestBitmap(void) {
 	Serial.println("Sprite");
 	// Sprite
-	for (int col = 0; col < 2; ++col) // 0: no flip, 1: flip
+	for (int col = 0; col < 2; ++col)  // 0: no flip, 1: flip
 	{
 		bool flip = (col == 1);
 		int x = col * 32;
 
-		for (int row = 0; row < 3; ++row)
-		{
+		for (int row = 0; row < 3; ++row) {
 			int y = row * 32;
 			myTFT.drawSpriteData(x, y, SpriteTest16, 32, 32, myTFT.C_LBLUE, flip);
 		}
@@ -167,8 +159,7 @@ void TestBitmap(void)
 	ScreenReset();
 }
 
-void TestBitmapFPS(void)
-{
+void TestBitmapFPS(void) {
 	Serial.println("Bitmap FPS");
 	// Values to count frame rate per second
 	long previousMillis = 0;
@@ -184,11 +175,11 @@ void TestBitmapFPS(void)
 	delay(5000);
 	myTFT.setTextColor(myTFT.C_YELLOW, myTFT.C_RED);
 
-	while (1) // run for 1,000 iterations
+	while (1)  // run for 1,000 iterations
 	{
 		unsigned long currentMillis = millis();
 
-		if (currentMillis - previousMillis >= 1000) // every second
+		if (currentMillis - previousMillis >= 1000)  // every second
 		{
 			fps = currentFramerate - lastFramerate;
 			lastFramerate = currentFramerate;
@@ -205,14 +196,14 @@ void TestBitmapFPS(void)
 		myTFT.print(fps);
 		myTFT.writeBuffer();
 		//   **
-	} // end of while
+	}  // end of while
 	// Report results to usb
 	Serial.print("Seconds : ");
-  Serial.println(seconds);
+	Serial.println(seconds);
 	Serial.print("Count : ");
-  Serial.println(count);
+	Serial.println(count);
 	Serial.print("FPS : ");
-  Serial.println(fps);
+	Serial.println(fps);
 
 	// Print to screen
 	myTFT.clearBuffer(myTFT.C_BLACK);
@@ -229,8 +220,7 @@ void TestBitmapFPS(void)
 	myTFT.fillScreen(myTFT.C_BLACK);
 }
 
-void TestTextFPS(void)
-{
+void TestTextFPS(void) {
 	Serial.println("Text FPS");
 	myTFT.fillScreen(myTFT.C_BLACK);
 	myTFT.setFont(FontPico);
@@ -241,23 +231,22 @@ void TestTextFPS(void)
 	uint16_t count = 0;
 	uint16_t seconds = 0;
 	uint16_t fps = 0;
-	while (1)
-	{
+	while (1) {
 		unsigned long currentMillis = millis();
 
-		if (currentMillis - previousMillis >= 1000) // every second
+		if (currentMillis - previousMillis >= 1000)  // every second
 		{
 			fps = currentFramerate - lastFramerate;
 			lastFramerate = currentFramerate;
 			previousMillis = currentMillis;
 			seconds++;
 			//myTFT.clearBuffer(myTFT.C_BLACK);
-			if (count >= 500){
+			if (count >= 100) {
 				Serial.print("FPS : ");
-        Serial.println(fps);
-        Serial.print("Seconds  : ");
-        Serial.println(seconds);
-				return; // end if count gets to this
+				Serial.println(fps);
+				Serial.print("Seconds  : ");
+				Serial.println(seconds);
+				return;  // end if count gets to this
 			}
 		}
 		currentFramerate++;
@@ -276,6 +265,13 @@ void TestTextFPS(void)
 		myTFT.println("Testing!");
 		myTFT.writeBuffer();
 		//  ****
+	}
+}
+
+void SetBuffer(void) {
+	if (myTFT.setBuffer() != DisLib16::Success) {
+		Serial.println("set buffer failed.");
+		while (1) {};
 	}
 }
 /// @endcond

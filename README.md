@@ -84,7 +84,7 @@ the dependency 'display16_LTSM' repository, [URL github link](https://github.com
 | GRAPHICS | Graphics | dislib16 ADVANCED GRAPHICS ENABLE must be enabled for all tests to work |
 | FUNCTIONS FPS | Functions(like rotate, scroll) + FPS tests | --- |
 | BITMAP | 1,8 & 16 bit bitmaps tests + bitmap FPS tests | Bitmap test data is stored in arrays |
-| DEMO | A demo | dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
+| DEMOS | Demos| dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
 | FRAME BUFFER | Testing frame Buffer mode | dislib16 ADVANCED SCREEN BUFFER ENABLE must be enabled user option 2 |
 
 ### Setup
